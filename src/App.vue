@@ -1,21 +1,33 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <router-view></router-view>
+    <date-html @timeParse="setTime"></date-html>
+    <div>
+      {{this.timeData}}
+    </div>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
+import dateHtml from './components/dateTime.vue'
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    dateHtml
+  },
+  data(){
+    return{
+      timeData:''
+    }
+  },
+  methods:{
+    setTime(val){
+      console.log(val)
+      this.timeData=val
+    }
   }
 }
 </script>
-
 <style>
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
