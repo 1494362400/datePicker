@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <router-view></router-view>
-    <date-html @timeParse="setTime"></date-html>
+    <date-html :timeArr="timeArr" @timeParse="setTime"></date-html>
     <div>
       {{this.timeData}}
     </div>
@@ -17,7 +17,17 @@ export default {
   },
   data(){
     return{
-      timeData:''
+      timeData:'',
+      timeArr:[
+        {
+          text: "昨日",
+          type: 1,
+        },
+        {
+          text: "今日",
+          type: 2,
+        },
+      ]
     }
   },
   methods:{

@@ -22,10 +22,11 @@
 </template>
 <script>
 export default {
-  data() {
-    return {
-      pickerOptions: {},//禁用
-      timeArr: [
+  props:{
+    timeArr:{
+      type:Array,
+      default(){
+        return [
         {
           text: "昨日",
           type: 1,
@@ -46,7 +47,14 @@ export default {
           text: "自定义",
           type: -1,
         },
-      ],
+      ]
+      }
+    }
+  },
+
+  data() {
+    return {
+      pickerOptions: {},//禁用
       todayNow: this.$moment().format(),
       timeValue: "",//
       timeData: {//传给父级的内容
@@ -135,14 +143,18 @@ export default {
           };
           break;
         case -1:
+          this.timeData.time={
+            start:'',
+            end:''
+          }
           this.pickerOptions = {
             disabledDate() {
-              return false;
             },
           };
           break;
       }
       //传给父级
+      this.timeData.timeType=type
       this.$emit("timeParse", this.timeData);
     },
   },
